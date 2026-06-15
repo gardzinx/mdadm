@@ -213,9 +213,19 @@ enum sys_dev_type {
 	SYS_DEV_MAX
 };
 
+enum vmd_domains {
+	DOMAIN = 0,
+	DOMAIN_COUNT
+};
+
+struct domain {
+	char *path;
+	struct domain *next;
+};
+
 struct sys_dev {
 	enum sys_dev_type type;
-	char *path;
+	struct domain *domain;
 	char *pci_id;
 	__u16  dev_id;
 	__u32  class;
