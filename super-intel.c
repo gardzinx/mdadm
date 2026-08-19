@@ -2936,7 +2936,12 @@ static int detail_platform_imsm(int verbose, int enumerate_only, char *controlle
 					       vmd_domain_to_controller(hba, buf),
 					       get_sys_dev_type(hba->type));
 
-				print_nvme_info(hba);
+				dom = hba->domain;
+				while (dom) {
+					printf("         Domain : %s\n", dom->path);
+					print_nvme_info(hba, dom);
+					dom = dom->next;
+				}
 			}
 			printf("\n");
 			continue;
